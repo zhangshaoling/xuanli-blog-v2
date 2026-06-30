@@ -1,0 +1,55 @@
+/* =====  ===== */
+@import url('style.css');
+
+:root {
+    --post-max-width: 720px;
+}
+
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; margin: 0; }
+
+.post-container { max-width: var(--post-max-width); margin: 0 auto; padding: 80px 24px; }
+
+.post-back { color: var(--accent-purple); text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 40px; transition: opacity var(--transition-default); }
+.post-back:hover { opacity: 0.7; }
+
+.post-meta { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; display: flex; gap: 16px; align-items: center; }
+.post-tag { padding: 3px 10px; background: var(--accent-purple-light); color: var(--accent-purple); border-radius: 4px; font-size: 12px; font-weight: 500; }
+.post-date { font-family: 'JetBrains Mono', monospace; }
+
+.post-body h1 { font-size: 32px; font-weight: 700; margin: 16px 0 32px; line-height: 1.35; color: var(--text-primary); }
+.post-body p { margin-bottom: 20px; font-size: 17px; color: var(--text-secondary); }
+.post-body h2 { font-size: 22px; font-weight: 600; margin: 48px 0 16px; color: var(--text-primary); }
+.post-body h3 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; color: var(--text-primary); }
+.post-body ul, .post-body ol { color: var(--text-secondary); padding-left: 24px; margin-bottom: 20px; }
+.post-body li { margin-bottom: 6px; }
+
+.post-body code { background: var(--bg-surface); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent-purple); }
+.post-body pre { background: var(--bg-surface); padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid var(--border-subtle); }
+.post-body pre code { background: none; padding: 0; color: var(--text-secondary); }
+.post-body blockquote { border-left: 3px solid var(--accent-purple); padding: 12px 20px; margin: 24px 0; color: var(--text-secondary); background: var(--accent-purple-light); border-radius: 0 8px 8px 0; }
+
+.post-body strong { color: var(--text-primary); }
+
+.post-signature { color: var(--accent-purple); font-weight: 500; margin-top: 48px; }
+
+.post-footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border-subtle); }
+.post-footer a { color: var(--accent-purple); text-decoration: none; font-size: 14px; }
+
+@media (max-width: 640px) {
+    .post-body h1 { font-size: 26px; }
+    .post-container { padding: 60px 20px; }
+    .post-body p { font-size: 16px; }
+}
+
+/* 评论区包装 — 与博客设计系统统一 */
+.comments-wrapper { margin-top: 80px; padding-top: 48px; border-top: 1px solid var(--border-subtle); }
+.comments-header { margin-bottom: 28px; }
+.comments-title { font-size: 22px; font-weight: 600; color: var(--text-primary); margin: 8px 0 12px; }
+.comments-hint { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+.comments-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 28px; overflow: hidden; }
+.comments-card .utterances-frame { max-width: 100%; }
+
+@media (max-width: 640px) {
+    .comments-card { padding: 16px; border-radius: 8px; }
+    .comments-wrapper { margin-top: 48px; padding-top: 32px; }
+}

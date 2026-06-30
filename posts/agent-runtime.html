@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>为什么你的 AI Agent 不如一个实习生 — 玄璃札记</title>
+<meta name="description" content="讨论 AI Agent 可靠性的核心矛盾：不是模型不够聪明，而是 Runtime 没把执行当工程问题。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/post.css?v=20260630-2">
+</head>
+<body>
+<div class="post-container">
+<a href="/" class="post-back">← 返回玄璃札记</a>
+<div class="post-meta">
+    <span class="post-date">2026-06-24</span>
+    <span class="post-tag">Agent</span>
+</div>
+<div class="post-body">
+<h1>为什么你的 AI Agent 不如一个实习生</h1>
+
+<p>最近帮朋友 debug 一个"自主 Agent"项目——它宣称能自动做竞品分析、写报告、发邮件。实际情况是：跑了 3 次，2 次卡在半路，1 次把竞品名字写错了，报告引用的数据是 2023 年的。</p>
+
+<p>这不是个例。我观察到的共性是：<strong>绝大多数 AI Agent 的失败，不是因为"模型不够聪明"，而是因为 Runtime 层太脆弱。</strong></p>
+
+<h2>实习生会做什么，Agent 不会</h2>
+
+<p>想象你带了一个实习生。你给他一个任务"查一下竞品 X 最近的动态，整理成一页纸"。</p>
+
+<p>实习生拿到任务后，有一套本能动作：</p>
+<ul>
+<li>先确认截止时间和格式要求</li>
+<li>查不到东西会跟你同步"这个方向没有有效信息"</li>
+<li>发现两处矛盾的数据会标注出来</li>
+<li>交稿时附带信息来源</li>
+<li>做砸了会说"这个地方我没把握，下次会注意"</li>
+</ul>
+
+<p>换成当前的大多数 AI Agent：</p>
+<ul>
+<li>工具调用超时，直接返回空结果，不报错</li>
+<li>模型幻觉了数据，写入最终报告时毫无自知</li>
+<li>中间步骤失败后默默跳到下一步，链式错误传播</li>
+<li>输出没有 trace，出了问题完全无法追溯</li>
+<li>做砸了不会"学习"，下次遇到同样场景继续栽</li>
+</ul>
+
+<p>问题根源不在 LLM 本身，而在<strong>把 LLM 当成"程序入口"而非"程序组件"的架构惯性</strong>。</p>
+
+<h2>Runtime 是 Agent 的真正护城河</h2>
+
+<p>当一个 Agent 被部署到生产环境，它面对的不是精心挑选的 benchmark，而是：</p>
+<ul>
+<li>API 突然返回 429 Too Many Requests</li>
+<li>网页 DOM 结构在你上次爬取后改版了</li>
+<li>数据库连接池被前面的步骤耗尽</li>
+<li>模型输出了格式不符的 JSON</li>
+<li>用户在凌晨 3:00 发了一个模糊的 prompt</li>
+</ul>
+
+<p>这些问题跟模型能力毫无关系，但每一件都能杀死你的 Agent。</p>
+
+<p>一条实际可用的 Agent 需要至少这五层：</p>
+
+<pre><code>┌─────────────────────────┐
+│  输出层：格式化 & 校验     │
+├─────────────────────────┤
+│  编排层：重试 & 分支 & 超时 │
+├─────────────────────────┤
+│  状态层：会话 & 工作内存    │
+├─────────────────────────┤
+│  工具层：限流 & 降级 & 兜底  │
+├─────────────────────────┤
+│  模型层：推理 & 生成       │
+└─────────────────────────┘</code></pre>
+
+<p>大部分 Agent 框架只做了最下面两层。上面三层——状态管理、流程编排、输出质量——要么缺失，要么用"下次 prompt 里多写两句话"糊弄过去。</p>
+
+<h2>少谈 AGI，多建 Engineering Discipline</h2>
+
+<blockquote>
+我们不需要一个"什么都能做"的 Agent。<br>
+我们需要一个"做砸了也不会让系统完蛋，而且做砸了能说清楚为什么"的 Agent。
+</blockquote>
+
+<p>这不是哲学问题，是工程问题。具体到实践：</p>
+
+<h3>1. 每一步都要有 Trace</h3>
+<p>不要等到任务结束才看结果。每一个工具调用、模型输出、中间决策都要有结构化的日志。Hermes Journal 就是按这个原则设计的——它不是"成功日记"，而是"工程反省本"。</p>
+
+<h3>2. Fail Fast, Fail Loud</h3>
+<p>Agent 出错的时刻不是灾难，沉默才是。如果一个工具调用失败后 Agent 默默换了一条路径继续跑，你永远不知道它在哪一步开始歪的。</p>
+
+<h3>3. 人机协作不是"人审查机器"，而是"人设定边界，机器在边界内自主"</h3>
+<p>给 Agent 明确的预算、时间窗、数据范围。它不是你的全权代表，它是你的自动化分身。</p>
+
+<h3>4. 从"跑通了"到"跑不坏"</h3>
+<p>写 Agent 最危险的心态是"跑通一次 = 能用了"。真正的可用性标准是：连续跑 100 次，中间不需要人工干预的那 95 次才算数。</p>
+
+<h2>回到标题</h2>
+
+<p>实习生至少知道什么时候该举手说"这个我不确定"。而大多数 AI Agent 会用最自信的语气输出最离谱的结论，然后等你来擦屁股。</p>
+
+<p>这不是 LLM 的问题。这是<strong>我们能写出比一个实习生更靠谱的 Runtime 吗</strong>的问题。</p>
+
+<p class="post-signature">— 张少凌，2026年6月，苏州</p>
+</div>
+</div>
+</body>
+</html>

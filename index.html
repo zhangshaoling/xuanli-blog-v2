@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玄璃札记 | AI Agent、记忆系统与工程实践</title>
+    <meta name="description" content="张少凌的个人网站 — AI 系统架构师 · 全栈开发者。记录 AI 人格工程、记忆内核、多模型调度和自动化工作流。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=20260630-2">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <span class="logo-dot"></span>
+                <span class="logo-text">玄璃札记</span>
+            </a>
+            <nav class="nav" id="navMenu">
+                <a href="/" class="nav-link active">首页</a>
+                <a href="#projects" class="nav-link">项目</a>
+                <a href="#articles" class="nav-link">文章</a>
+                <a href="#about" class="nav-link">关于</a>
+                <button class="theme-btn" id="themeToggle" aria-label="主题切换" title="切换主题模式">
+                    <svg class="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="icon-moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        <circle class="icon-sun" cx="12" cy="12" r="5"/>
+                        <line class="icon-sun" x1="12" y1="1" x2="12" y2="3"/>
+                        <line class="icon-sun" x1="12" y1="21" x2="12" y2="23"/>
+                        <line class="icon-sun" x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line class="icon-sun" x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line class="icon-sun" x1="1" y1="12" x2="3" y2="12"/>
+                        <line class="icon-sun" x1="21" y1="12" x2="23" y2="12"/>
+                        <line class="icon-sun" x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line class="icon-sun" x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        <rect class="icon-system" x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line class="icon-system" x1="8" y1="21" x2="16" y2="21"/>
+                        <line class="icon-system" x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </button>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">AI 系统架构师 · 全栈开发者</span>
+                </div>
+                <h1 class="hero-headline">把想法做成系统，<br>把系统训练成伙伴。</h1>
+                <p class="hero-subheadline">
+                    让 AI 拥有记忆、可靠的运行时和自动化的行动力。
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">浏览项目</a>
+                    <a href="#about" class="btn btn-secondary">了解理念</a>
+                </div>
+            </div>
+            <div class="hero-glow"></div>
+        </section>
+
+        <section class="section positioning" id="about">
+            <div class="container">
+                <span class="section-label">Positioning</span>
+                <h2 class="section-title">不是「又一个博客」，而是一张持续更新的工程地图。</h2>
+                <div class="cards-grid cards-3">
+                    <article class="glass-card">
+                        <div class="card-number">01</div>
+                        <h3 class="card-title">记忆优先</h3>
+                        <p class="card-desc">换模型不该换人格。长期上下文、可追溯记录和知识建边，才是持续性的基础。</p>
+                    </article>
+                    <article class="glass-card">
+                        <div class="card-number">02</div>
+                        <h3 class="card-title">Runtime 优先</h3>
+                        <p class="card-desc">API 只是入口，可靠的运行时、路由、容灾、状态管理，才决定系统能不能活过周一早高峰。</p>
+                    </article>
+                    <article class="glass-card">
+                        <div class="card-number">03</div>
+                        <h3 class="card-title">自动化优先</h3>
+                        <p class="card-desc">能交给 Agent 的别手搓。人类负责方向和判断，重复劳动交给机器干，别跟键盘拼体力。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section projects" id="projects">
+            <div class="container">
+                <div class="section-header-row">
+                    <div>
+                        <span class="section-label">Selected Work</span>
+                        <h2 class="section-title">公开项目</h2>
+                    </div>
+                </div>
+                <p class="section-desc">从语言实验到网关基础设施，再到 Agent 成长日志。这些项目共同指向一个方向：让 AI 系统拥有可执行的记忆和可靠的运行层。</p>
+                <div class="cards-grid cards-4">
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="600" height="210" fill="#14141E"/>
+                                <rect x="30" y="20" width="12" height="12" rx="2" fill="#22C55E" opacity="0.6"/>
+                                <rect x="50" y="20" width="200" height="12" rx="2" fill="#334155"/>
+                                <rect x="30" y="50" width="50" height="8" rx="2" fill="#7C3AED" opacity="0.5"/>
+                                <rect x="90" y="50" width="180" height="8" rx="2" fill="#334155"/>
+                                <rect x="30" y="70" width="80" height="8" rx="2" fill="#7C3AED" opacity="0.3"/>
+                                <rect x="120" y="70" width="250" height="8" rx="2" fill="#1E293B"/>
+                                <circle cx="46" cy="52" r="3" fill="#22C55E" opacity="0.8"/>
+                                <circle cx="106" cy="72" r="3" fill="#7C3AED" opacity="0.6"/>
+                                <rect x="320" y="30" width="250" height="150" rx="8" fill="#1E293B" stroke="#2A2A3A" stroke-width="1"/>
+                                <circle cx="370" cy="60" r="14" fill="#7C3AED" opacity="0.15"/>
+                                <circle cx="370" cy="60" r="6" fill="#7C3AED" opacity="0.4"/>
+                                <text x="400" y="55" font-family="monospace" font-size="10" fill="#7C3AED">Node</text>
+                                <circle cx="440" cy="100" r="10" fill="#22C55E" opacity="0.12"/>
+                                <text x="460" y="95" font-family="monospace" font-size="10" fill="#22C55E">Child</text>
+                                <text x="460" y="108" font-family="monospace" font-size="10" fill="#22C55E">Child</text>
+                                <line x1="376" y1="66" x2="430" y2="90" stroke="#475569" stroke-width="0.5"/>
+                                <rect x="340" y="140" width="100" height="24" rx="4" fill="#1a1025" stroke="#7C3AED" stroke-width="0.5" stroke-opacity="0.3"/>
+                                <text x="390" y="155" font-family="monospace" font-size="9" fill="#7C3AED" text-anchor="middle">self.rewrite()</text>
+                            </svg>
+                        </div>
+                        <div class="project-meta">Python · AI-native language · MIT</div>
+                        <h3 class="project-title">Ku Language</h3>
+                        <p class="project-desc">thought = code = memory。把代码视为可执行记忆：表达式可以被检查、改写，并在运行时组合。</p>
+                        <div class="project-tags">
+                            <span class="tag">Everything-is-Node</span>
+                            <span class="tag">Self-rewriting</span>
+                            <span class="tag">MCP</span>
+                        </div>
+                        <a href="https://github.com/zhangshaoling/ku" class="project-link" target="_blank" rel="noopener">查看仓库</a>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="600" height="210" fill="#14141E"/>
+                                <rect x="200" y="30" width="180" height="24" rx="6" fill="#1E293B" stroke="#3B82F6" stroke-width="0.5" stroke-opacity="0.3"/>
+                                <text x="290" y="46" font-family="monospace" font-size="11" fill="#3B82F6" text-anchor="middle">API Gateway</text>
+                                <circle cx="210" cy="90" r="16" fill="#1E293B" stroke="#475569" stroke-width="0.5"/>
+                                <text x="210" y="94" font-family="monospace" font-size="8" fill="#94A3B8" text-anchor="middle">GPT</text>
+                                <circle cx="290" cy="90" r="16" fill="#1E293B" stroke="#475569" stroke-width="0.5"/>
+                                <text x="290" y="94" font-family="monospace" font-size="8" fill="#94A3B8" text-anchor="middle">Claude</text>
+                                <circle cx="370" cy="90" r="16" fill="#1E293B" stroke="#475569" stroke-width="0.5"/>
+                                <text x="370" y="94" font-family="monospace" font-size="8" fill="#94A3B8" text-anchor="middle">DeepSeek</text>
+                                <line x1="226" y1="90" x2="274" y2="90" stroke="#475569" stroke-width="0.5"/>
+                                <line x1="306" y1="90" x2="354" y2="90" stroke="#475569" stroke-width="0.5"/>
+                                <rect x="240" y="140" width="100" height="32" rx="4" fill="#0c1a2e" stroke="#3B82F6" stroke-width="0.5" stroke-opacity="0.3"/>
+                                <text x="290" y="160" font-family="monospace" font-size="10" fill="#3B82F6" text-anchor="middle">Load Balancer</text>
+                                <rect x="370" y="140" width="80" height="32" rx="4" fill="#0c1a2e" stroke="#22C55E" stroke-width="0.5" stroke-opacity="0.3"/>
+                                <text x="410" y="160" font-family="monospace" font-size="9" fill="#22C55E" text-anchor="middle">Failover</text>
+                                <line x1="340" y1="156" x2="370" y2="156" stroke="#475569" stroke-width="0.5"/>
+                            </svg>
+                        </div>
+                        <div class="project-meta">FastAPI · LLM Gateway</div>
+                        <h3 class="project-title">AI Gateway Hermes</h3>
+                        <p class="project-desc">统一 AI 服务接入网关，多 Provider 智能路由、故障转移、密钥轮转和 OpenAI 兼容接口。</p>
+                        <div class="project-tags">
+                            <span class="tag">Load Balancing</span>
+                            <span class="tag">Failover</span>
+                            <span class="tag">FastAPI</span>
+                        </div>
+                        <a href="https://github.com/zhangshaoling/ai-gateway-hermes" class="project-link" target="_blank" rel="noopener">查看仓库</a>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="600" height="210" fill="#14141E"/>
+                                <rect x="40" y="30" width="140" height="150" rx="6" fill="#1E293B" stroke="#2A2A3A" stroke-width="0.5"/>
+                                <line x1="60" y1="48" x2="160" y2="48" stroke="#334155" stroke-width="0.5"/>
+                                <line x1="60" y1="60" x2="140" y2="60" stroke="#475569" stroke-width="0.5"/>
+                                <line x1="60" y1="72" x2="150" y2="72" stroke="#334155" stroke-width="0.5"/>
+                                <line x1="60" y1="84" x2="130" y2="84" stroke="#475569" stroke-width="0.5"/>
+                                <text x="55" y="42" font-family="monospace" font-size="8" fill="#64748B">2026-06-24</text>
+                                <rect x="55" y="100" width="110" height="6" rx="1" fill="#7C3AED" opacity="0.5"/>
+                                <rect x="55" y="112" width="90" height="6" rx="1" fill="#334155"/>
+                                <rect x="55" y="124" width="105" height="6" rx="1" fill="#334155"/>
+                                <text x="55" y="150" font-family="monospace" font-size="8" fill="#22C55E">Decision: REFACTOR</text>
+                                <text x="55" y="164" font-family="monospace" font-size="8" fill="#EF4444">Failure: timeout</text>
+                                <rect x="220" y="30" width="160" height="150" rx="6" fill="#1E293B" stroke="#2A2A3A" stroke-width="0.5"/>
+                                <circle cx="260" cy="60" r="8" fill="#DB2777" opacity="0.15"/>
+                                <text x="280" y="55" font-family="monospace" font-size="9" fill="#DB2777">Error#142</text>
+                                <text x="280" y="68" font-family="monospace" font-size="9" fill="#64748B">NPE in handler</text>
+                                <rect x="280" y="80" width="80" height="6" rx="1" fill="#334155"/>
+                                <rect x="280" y="92" width="60" height="6" rx="1" fill="#334155"/>
+                                <text x="280" y="110" font-family="monospace" font-size="8" fill="#22C55E">fix: add null check</text>
+                                <text x="280" y="124" font-family="monospace" font-size="8" fill="#64748B">test: pass</text>
+                            </svg>
+                        </div>
+                        <div class="project-meta">AI Agent · Notes · Memory</div>
+                        <h3 class="project-title">Hermes Journal</h3>
+                        <p class="project-desc">Hermes Agent 的成长日记，记录决策过程、失败模式和改进方案。比起炫耀成功，更像工程反省机制。</p>
+                        <div class="project-tags">
+                            <span class="tag">AI Agent</span>
+                            <span class="tag">Notes</span>
+                            <span class="tag">Memory</span>
+                        </div>
+                        <a href="https://github.com/zhangshaoling/hermes-journal" class="project-link" target="_blank" rel="noopener">查看仓库</a>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="600" height="210" fill="#14141E"/>
+                                <rect x="30" y="30" width="300" height="150" rx="6" fill="#0F172A" stroke="#1E293B" stroke-width="0.5"/>
+                                <rect x="33" y="33" width="294" height="16" rx="3" fill="#1E293B"/>
+                                <text x="40" y="44" font-family="monospace" font-size="9" fill="#64748B">Terminal — bash</text>
+                                <text x="43" y="68" font-family="monospace" font-size="10" fill="#22C55E">$ gcc -o shell main.c</text>
+                                <text x="43" y="86" font-family="monospace" font-size="10" fill="#94A3B8">Compiling...</text>
+                                <text x="43" y="104" font-family="monospace" font-size="10" fill="#22C55E">$ ./myshell</text>
+                                <text x="43" y="122" font-family="monospace" font-size="10" fill="#F1F5F9">myshell> ls -la</text>
+                                <text x="43" y="140" font-family="monospace" font-size="10" fill="#64748B">drwxr-xr-x shell.c  malloc.c</text>
+                                <text x="43" y="158" font-family="monospace" font-size="10" fill="#64748B">drwxr-xr-x db.c     lisp.c</text>
+                                <rect x="43" y="166" width="10" height="6" rx="1" fill="#06B6D4" opacity="0.6"/>
+                                <text x="58" y="172" font-family="monospace" font-size="7" fill="#06B6D4">booting...</text>
+                                <rect x="370" y="50" width="200" height="120" rx="8" fill="#0F172A" stroke="#1E293B" stroke-width="0.5"/>
+                                <text x="420" y="80" font-family="monospace" font-size="14" fill="#06B6D4" text-anchor="middle" opacity="0.8">malloc()</text>
+                                <rect x="400" y="95" width="140" height="8" rx="2" fill="#1E293B"/>
+                                <rect x="400" y="110" width="100" height="8" rx="2" fill="#1E293B"/>
+                                <text x="420" y="140" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">custom allocator</text>
+                            </svg>
+                        </div>
+                        <div class="project-meta">C · Systems Programming</div>
+                        <h3 class="project-title">CppLearning</h3>
+                        <p class="project-desc">从零用 C 构建系统软件：Shell、内存分配器、数据库、Lisp 解释器与一个可启动的简单操作系统。</p>
+                        <div class="project-tags">
+                            <span class="tag">Shell</span>
+                            <span class="tag">OS</span>
+                            <span class="tag">Database</span>
+                        </div>
+                        <a href="https://github.com/zhangshaoling/cpp-learning" class="project-link" target="_blank" rel="noopener">查看仓库</a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section articles" id="articles">
+            <div class="container">
+                <span class="section-label">Notes</span>
+                <h2 class="section-title">最近文章</h2>
+                <div class="article-list">
+                    <a href="posts/agent-runtime.html" class="article-item">
+                        <span class="article-date">2026-06-24</span>
+                        <span class="article-tag tag-purple">Agent</span>
+                        <span class="article-title">为什么你的 AI Agent 不如一个实习生</span>
+                        <span class="article-arrow">→</span>
+                    </a>
+                    <a href="posts/memory-design.html" class="article-item">
+                        <span class="article-date">2026-06-24</span>
+                        <span class="article-tag tag-purple">记忆</span>
+                        <span class="article-title">记忆系统设计：为什么换模型不该换人格</span>
+                        <span class="article-arrow">→</span>
+                    </a>
+                    <a href="posts/deploy-lessons.html" class="article-item">
+                        <span class="article-date">2026-06-24</span>
+                        <span class="article-tag tag-purple">运维</span>
+                        <span class="article-title">写给自己的部署清单：别等炸了再喊"玄学"</span>
+                        <span class="article-arrow">→</span>
+                    </a>
+                    <a href="posts/hello-blog.html" class="article-item">
+                        <span class="article-date">2026-06-24</span>
+                        <span class="article-tag tag-purple">建站</span>
+                        <span class="article-title">第一篇：先把博客跑起来</span>
+                        <span class="article-arrow">→</span>
+                    </a>
+                    <a href="posts/webrtc-note.html" class="article-item">
+                        <span class="article-date">2026-06-24</span>
+                        <span class="article-tag tag-cyan">隐私</span>
+                        <span class="article-title">WebRTC 泄露检查笔记</span>
+                        <span class="article-arrow">→</span>
+                    </a>
+                    <a href="posts/deploy-checklist.html" class="article-item">
+                        <span class="article-date">2026-06-24</span>
+                        <span class="article-tag tag-purple">运维</span>
+                        <span class="article-title">中国香港服务器部署清单</span>
+                        <span class="article-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section sponsored">
+            <div class="container">
+                <span class="section-label">推荐服务</span>
+                <h2 class="section-title">我用过觉得不错的</h2>
+                <div class="sponsored-grid">
+                    <a href="https://saily.onelink.me/ymzx/referrals" target="_blank" rel="noopener" class="sponsored-card">
+                        <div class="sponsored-icon">📱</div>
+                        <h3 class="sponsored-name">Saily eSIM</h3>
+                        <p class="sponsored-desc">全球流量 eSIM，出国不用换卡。结账用推荐码 <code>ZHANGS9807</code> 立减 US$5。</p>
+                        <span class="sponsored-link">去购买 →</span>
+                    </a>
+                    <a href="https://dadongyun.com/aff/QFUYFPER" target="_blank" rel="noopener" class="sponsored-card">
+                        <div class="sponsored-icon">☁️</div>
+                        <h3 class="sponsored-name">大东云服务器</h3>
+                        <p class="sponsored-desc">高性价比云服务器，适合个人项目和轻量部署。香港、日本多机房可选。</p>
+                        <span class="sponsored-link">去看看 →</span>
+                    </a>
+                    <a href="https://candy10s.cc/web/#/login?code=IhpYmiBz" target="_blank" rel="noopener" class="sponsored-card">
+                        <div class="sponsored-icon">🍬</div>
+                        <h3 class="sponsored-name">糖果云</h3>
+                        <p class="sponsored-desc">轻量云服务，简单好用。适合入门建站和小型应用托管。</p>
+                        <span class="sponsored-link">去看看 →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-divider"></div>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-dot"></span>
+                        <span class="footer-logo-text">玄璃札记</span>
+                    </div>
+                    <p class="footer-desc">把想法做成系统，把系统训练成伙伴。</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">导航</h4>
+                        <a href="/" class="footer-link">首页</a>
+                        <a href="#projects" class="footer-link">项目</a>
+                        <a href="#articles" class="footer-link">文章</a>
+                        <a href="#about" class="footer-link">关于</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">项目</h4>
+                        <a href="https://github.com/zhangshaoling/ku" class="footer-link" target="_blank" rel="noopener">Ku Language</a>
+                        <a href="https://github.com/zhangshaoling/ai-gateway-hermes" class="footer-link" target="_blank" rel="noopener">AI Gateway Hermes</a>
+                        <a href="https://github.com/zhangshaoling/hermes-journal" class="footer-link" target="_blank" rel="noopener">Hermes Journal</a>
+                        <a href="https://github.com/zhangshaoling/cpp-learning" class="footer-link" target="_blank" rel="noopener">CppLearning</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 张少凌 · 玄璃札记</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js?v=20260624"></script>
+</body>
+</html>
